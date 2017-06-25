@@ -1,0 +1,28 @@
+{
+  "name": "news_scraper",
+  "version": "1.0.0",
+  "description": "An app that scrapes news and allows users to comment on them",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stuartschafer/News-Scraper.git"
+  },
+  "author": "Stuart Schafer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stuartschafer/News-Scraper/issues"
+  },
+  "homepage": "https://github.com/stuartschafer/News-Scraper#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cheerio": "^1.0.0-rc.1",
+    "express": "^4.15.3",
+    "express-handlebars": "^3.0.0",
+    "mongoose": "^4.10.8",
+    "request": "^2.81.0"
+  }
+}
