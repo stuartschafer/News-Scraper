@@ -1,0 +1,27 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center welcome">
+            <h1 id="welcome_title">Welcome to News Scraper</h1>
+            <button type="submit" id="scrape" class="btn btn-danger"> Scrape the onion! </button>
+        </div>
+    </div>
+
+
+    <div class="row" id="newsStories">
+        <div class="col-md-8">
+            {{#each newsStuff}}
+
+                <h5>{{title}}</h5>
+                <a href= {{link}}> {{link}} </a>
+                {{!--<br>
+                {{pic}}--}}
+                
+                <button type="submit" id="save" data-id="{{newsId}}" class="btn btn-success"> Save it! </button>
+                <h6>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</h6>
+
+            {{/each}}
+        
+        </div>
+    </div>
+</div>
