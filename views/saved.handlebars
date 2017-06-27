@@ -15,12 +15,23 @@
                 {{!--<br>
                 {{pic}}--}}
                 
-                <button type="submit" id="addNote" data-id="{{newsId}}" class="btn btn-info"> Add a Note </button>
-                <button type="submit" id="deleteFromSaved" data-id="{{newsId}}" class="btn btn-danger"> Delete from Saved </button>
-                <h6>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</h6>
+                <button type="submit" id="addNote" data-id="{{_id}}" title-id="{{title}}" class="btn btn-info saveOrDelete"> Add a Note </button>
+                <button type="submit" id="deleteFromSaved" data-id="{{_id}}" title-id="{{title}}" class="btn btn-danger saveOrDelete"> Delete from Saved </button>
+                <button type="submit" id="saveNote" data-id="{{_id}}" title-id="{{title}}" class="btn btn-success savetheNote"> Save this Note </button>
+                <h6>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</h6>
 
             {{/each}}
-        
+        </div>
+        <div class="col-md-4">
+            <div class="form-group" id="noteSection">
+                <label for="exampleTextarea">What do you think about...</label>
+                <h5>
+                    <span id="title"></span>
+                </h5>
+                <textarea class="form-control" id="noteTextArea" rows="5"></textarea>
+                <br>
+                
+            </div>
         </div>
     </div>
 </div>

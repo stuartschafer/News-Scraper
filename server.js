@@ -47,7 +47,7 @@ db.once("open", function() {
   console.log("Successfully connected to the Mongoose database!");
 });
 
-app.get("/home", function(req, res) {
+app.get("/", function(req, res) {
     // console.log("HERE!!!!");
     res.render("index");
 });
@@ -61,7 +61,7 @@ app.get("/scrape", function(req, res) {
         // var length = $('.headline').children().length;
         $(".headline").each(function(i, element) {
             // This will only allow 10 results to be saved
-            if (i >= 2) {
+            if (i >= 10) {
                return false;
             }
             var result = {};
@@ -69,7 +69,6 @@ app.get("/scrape", function(req, res) {
             result.link = "http://www.theonion.com" + $(this).children("a").attr("href");
             // result.pic = $(this).children(".thumb").text();
             
-
             entry = new Article(result);
 
             // For handlebars to recognize the id
@@ -124,15 +123,25 @@ app.get("/articles", function(req, res) {
 });
 
 app.post("/articles/:id", function(req, res) {
+    var savedNews = req.body.savedNews;
     console.log("~~~~~~~~~~~~~~~~~~~~~~");
     console.log(req.params.id);
+    console.log(savedNews);
     console.log("~~~~~~~~~~~~~~~~~~~~~~");
 
-    
-
-    if (req.body.savedNews = true) {
-        Article.findOneAndUpdate({ "_id": req.params.id }, { "savedNews": true }
-            )
+    if (savedNews === "true") {
+        console.log("This section will set it to TRUE");
+        Article.findOneAndUpdate({ "_id": req.params.id }, { "savedNews": true } )
+            .exec(function(err, doc) {
+                if (err) {
+                    console.log(err);
+                } else { 
+                    res.send(doc);
+                }
+            });
+    } else if (savedNews === "false") {
+        console.log("This section will set it to FALSE");
+        Article.findOneAndUpdate({ "_id": req.params.id }, { "savedNews": false } )
             .exec(function(err, doc) {
                 if (err) {
                     console.log(err);
@@ -157,7 +166,7 @@ app.post("/articles/:id", function(req, res) {
                     }
                 });
             }
-        });
+        }); 
     }
 });
 
