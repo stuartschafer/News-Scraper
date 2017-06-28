@@ -26,13 +26,14 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 
-var PORT = process.env.MONGODB_URI || 8080;
+var PORT = process.env.PORT || 8080;
 
 // For the static directory
 app.use(express.static("public"));
 
 // To connect with my mongoose db
 // mongoose.connect("mongodb://localhost/newsscrape");
+// mongoose.connect("mongodb://heroku_5k1cfsnp:onionscraper18@ds141082.mlab.com:41082/heroku_5k1cfsnp");
 mongoose.connect("mongodb://heroku_5k1cfsnp:miql9ut9f31gob5986c2hvqsfg@ds141082.mlab.com:41082/heroku_5k1cfsnp");
 
 var db = mongoose.connection;
