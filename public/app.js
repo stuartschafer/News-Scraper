@@ -6,6 +6,7 @@
 $(document).ready(function() {
     $("#noteSection").hide();
     $(".savetheNote").hide();
+    $(".deletetheNote").hide();
 });
 
 var id = "";
@@ -65,6 +66,7 @@ $(document).on("click", "#addNote", function() {
         }
         $("#noteSection").show();
         $("#saveNote").show();
+        $("#deleteNote").show();
         $(".saveOrDelete").hide();
         $("#title").html(titleofNote);
 
@@ -80,6 +82,7 @@ $(document).on("click", "#saveNote", function() {
     console.log("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
     $("#noteSection").hide();
     $("#saveNote").hide();
+    $("#deleteNote").hide();
     $(".saveOrDelete").show();
 
     $.ajax({
@@ -92,5 +95,24 @@ $(document).on("click", "#saveNote", function() {
     .done(function(data) {
         // $("#noteTextArea").empty();
         document.getElementById("noteForm").reset();
+    });
+});
+
+$(document).on("click", "#deleteNote", function() {
+    document.getElementById("noteForm").reset();
+    $("#noteSection").hide();
+    $(".editNote").hide();
+    $(".saveOrDelete").show();
+
+    $.ajax({
+        method: "POST",
+        url: "/articles/" + id,
+        data: {
+            body: ""
+        }
+    })
+    .done(function(data) { 
+        $("#saveNote").hide();
+        $("#deleteNote").hide();  
     });
 });
