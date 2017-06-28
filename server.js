@@ -26,11 +26,15 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 
+var PORT = process.env.PORT || 8080;
+
 // For the static directory
 app.use(express.static("public"));
 
 // To connect with my mongoose db
-mongoose.connect("mongodb://localhost/newsscrape");
+// mongoose.connect("mongodb://localhost/newsscrape");
+mongoose.connect("mongodb://heroku_5k1cfsnp:onionscraper18@ds141082.mlab.com:41082/heroku_5k1cfsnp");
+
 var db = mongoose.connection;
 
 // For handlebars, to define the main layout
@@ -177,6 +181,6 @@ app.get("/articles/:id", function(req, res) {
     });
 });
 
-app.listen(8080, function() {
+app.listen(PORT, function() {
   console.log("News Scraper is running on port 8080!");
 });
