@@ -115,19 +115,14 @@ app.get("/articles", function(req, res) {
         if (error) {
             res.send(error);
         } else {
-            // res.send(doc);
             var news = { newsStuff: doc}
             res.render("index", news);
         }
-    })
+    });
 });
 
 app.post("/articles/:id", function(req, res) {
     var savedNews = req.body.savedNews;
-    console.log("~~~~~~~~~~~~~~~~~~~~~~");
-    console.log(req.params.id);
-    console.log(savedNews);
-    console.log("~~~~~~~~~~~~~~~~~~~~~~");
 
     if (savedNews === "true") {
         console.log("This section will set it to TRUE");

@@ -1,3 +1,8 @@
+// FIX VERY BOTTOM OF THIS DOCUMENT
+// FIX VERY BOTTOM OF THIS DOCUMENT
+// FIX VERY BOTTOM OF THIS DOCUMENT
+
+
 $(document).ready(function() {
     $("#noteSection").hide();
     $(".savetheNote").hide();
@@ -45,15 +50,25 @@ $(document).on("click", "#deleteFromSaved", function() {
     location.href = "/saved";
 });
 
-
-
 $(document).on("click", "#addNote", function() {
     titleofNote = $(this).attr("title-id").trim();
     id = $(this).attr("data-id");
-    $("#noteSection").show();
-    $("#saveNote").show();
-    $(".saveOrDelete").hide();
-    $("#title").html(titleofNote);
+
+    $.ajax({
+        method: "GET",
+        url: "/articles/" + id
+    })
+    .done(function(data) {
+
+        if (data.note) {
+            $("#noteTextArea").html(data.note.body);
+        }
+        $("#noteSection").show();
+        $("#saveNote").show();
+        $(".saveOrDelete").hide();
+        $("#title").html(titleofNote);
+
+    });
 });
 
 $(document).on("click", "#saveNote", function() {
@@ -73,5 +88,9 @@ $(document).on("click", "#saveNote", function() {
         data: {
             body: body
         }
+    })
+    .done(function(data) {
+        // $("#noteTextArea").empty();
+        document.getElementById("noteForm").reset();
     });
 });
