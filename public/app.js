@@ -1,12 +1,8 @@
-// FIX VERY BOTTOM OF THIS DOCUMENT
-// FIX VERY BOTTOM OF THIS DOCUMENT
-// FIX VERY BOTTOM OF THIS DOCUMENT
-
-
 $(document).ready(function() {
     $("#noteSection").hide();
     $(".savetheNote").hide();
     $(".deletetheNote").hide();
+    $(".editting").hide();
 });
 
 var id = "";
@@ -20,11 +16,12 @@ $(document).on("click", "#scrape", function() {
     // }); 
 });
 
-$(document).on("click", "#save", function() {
+$(document).on("click", ".save", function() {
     id = $(this).attr("data-id");
     console.log("---------------------------");
     console.log(id);
     console.log("---------------------------");
+    $("#" + id).hide();
 
     $.ajax({
         method: "POST",
@@ -65,6 +62,7 @@ $(document).on("click", "#addNote", function() {
             $("#noteTextArea").html(data.note.body);
         }
         $("#noteSection").show();
+        $(".editting").show();
         $("#saveNote").show();
         $("#deleteNote").show();
         $(".saveOrDelete").hide();
@@ -84,6 +82,7 @@ $(document).on("click", "#saveNote", function() {
     $("#saveNote").hide();
     $("#deleteNote").hide();
     $(".saveOrDelete").show();
+    $(".editting").hide();
 
     $.ajax({
         method: "POST",
@@ -102,6 +101,7 @@ $(document).on("click", "#deleteNote", function() {
     document.getElementById("noteForm").reset();
     $("#noteSection").hide();
     $(".editNote").hide();
+    $(".editting").hide();
     $(".saveOrDelete").show();
 
     $.ajax({

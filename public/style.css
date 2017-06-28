@@ -1,0 +1,25 @@
+body {
+	background-image: url("onion_bg.jpg");
+	background-size: cover;
+    color: white;
+}
+
+#rowArea {
+	margin-top: 5px;
+	background-color: black;
+	border-color: white;
+	border-style: ridge;
+	border-width: 5px;
+	padding: 10px;
+}
+
+#noteArea {
+	background-color: grey;
+}
+
+#noteForm {
+	position: fixed;
+	width: 30%;
+	top: 60px;
+	right: 10px;
+}

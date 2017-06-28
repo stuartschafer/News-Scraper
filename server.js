@@ -92,7 +92,7 @@ app.get("/scrape", function(req, res) {
         // console.log(newArray);
         // console.log("------------------------------------------------------");
         var news = { newsStuff: newArray}
-        res.render("index", news);
+        res.render("scraped", news);
     });
 });
 
@@ -116,7 +116,7 @@ app.get("/articles", function(req, res) {
             res.send(error);
         } else {
             var news = { newsStuff: doc}
-            res.render("index", news);
+            res.render("scraped", news);
         }
     });
 });

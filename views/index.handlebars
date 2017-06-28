@@ -1,27 +1,8 @@
-
 <div class="container">
     <div class="row">
         <div class="col-md-12 text-center welcome">
-            <h1 id="welcome_title">Welcome to News Scraper</h1>
+            <h2 id="welcome_title">Get ready to cry, b/c you're about to scrape the biggest/best onion!</h2>
             <button type="submit" id="scrape" class="btn btn-danger"> Scrape the onion! </button>
-        </div>
-    </div>
-
-
-    <div class="row" id="newsStories">
-        <div class="col-md-8">
-            {{#each newsStuff}}
-
-                <h5>{{title}}</h5>
-                <a href= {{link}}> {{link}} </a>
-                {{!--<br>
-                {{pic}}--}}
-                
-                <button type="submit" id="save" data-id="{{_id}}" class="btn btn-success"> Save it! </button>
-                <h6>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</h6>
-
-            {{/each}}
-        
         </div>
     </div>
 </div>
