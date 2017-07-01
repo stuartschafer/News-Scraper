@@ -8,19 +8,14 @@ $(document).ready(function() {
 var id = "";
 var titleofNote = "";
 
+// This will run the scrape route to get the articles
 $(document).on("click", "#scrape", function() {
-    // alert("10 articles added");
     location.href = "/scrape";
-    // $.getJSON("/articles", function(data) {
-    //     console.log(data);  
-    // }); 
 });
 
+// This will save the article to the saved page
 $(document).on("click", ".save", function() {
     id = $(this).attr("data-id");
-    console.log("---------------------------");
-    console.log(id);
-    console.log("---------------------------");
     $("#" + id).hide();
 
     $.ajax({
@@ -32,11 +27,9 @@ $(document).on("click", ".save", function() {
     });
 });
 
+// This will delete an article from the saved page
 $(document).on("click", "#deleteFromSaved", function() {
     id = $(this).attr("data-id");
-    console.log("---------------------------");
-    console.log(id);
-    console.log("---------------------------");
 
     $.ajax({
         method: "POST",
@@ -48,6 +41,7 @@ $(document).on("click", "#deleteFromSaved", function() {
     location.href = "/saved";
 });
 
+// This will add a note to the related article
 $(document).on("click", "#addNote", function() {
     titleofNote = $(this).attr("title-id").trim();
     id = $(this).attr("data-id");
@@ -67,17 +61,12 @@ $(document).on("click", "#addNote", function() {
         $("#deleteNote").show();
         $(".saveOrDelete").hide();
         $("#title").html(titleofNote);
-
     });
 });
 
+// This will save the user entered note to the db
 $(document).on("click", "#saveNote", function() {
     var body = $("#noteTextArea").val().trim();
-    console.log("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-    console.log("id is " + id);
-    console.log("title is " + titleofNote);
-    console.log("body is " + body);
-    console.log("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
     $("#noteSection").hide();
     $("#saveNote").hide();
     $("#deleteNote").hide();
@@ -92,12 +81,14 @@ $(document).on("click", "#saveNote", function() {
         }
     })
     .done(function(data) {
-        // $("#noteTextArea").empty();
+        // This empties the form
         document.getElementById("noteForm").reset();
     });
 });
 
+// This deletes the note from the db
 $(document).on("click", "#deleteNote", function() {
+    // This empties the form
     document.getElementById("noteForm").reset();
     $("#noteSection").hide();
     $(".editNote").hide();

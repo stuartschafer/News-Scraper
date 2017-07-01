@@ -33,7 +33,6 @@ app.use(express.static("public"));
 
 // To connect with my mongoose db
 // mongoose.connect("mongodb://localhost/newsscrape");
-// mongoose.connect("mongodb://heroku_5k1cfsnp:onionscraper18@ds141082.mlab.com:41082/heroku_5k1cfsnp");
 mongoose.connect("mongodb://heroku_5k1cfsnp:miql9ut9f31gob5986c2hvqsfg@ds141082.mlab.com:41082/heroku_5k1cfsnp");
 
 var db = mongoose.connection;
@@ -79,23 +78,13 @@ app.get("/scrape", function(req, res) {
             // For handlebars to recognize the id
             entry.newsId = entry._id;
 
-            // console.log("~~~~~~~~~~~~~~~~~~");
-            // console.log(result.newsId);
-            // console.log("~~~~~~~~~~~~~~~~~~");
-
             newArray.push(entry);
             entry.save(function(err, doc) {
                 if (err) {
                     console.log(err);
-                } else {
-                    // console.log("~~~~~~~~~~~~~~~");
-                    // console.log(doc);              
                 }
             });
         });
-        // console.log("------------------------------------------------------");
-        // console.log(newArray);
-        // console.log("------------------------------------------------------");
         var news = { newsStuff: newArray}
         res.render("scraped", news);
     });
@@ -126,11 +115,12 @@ app.get("/articles", function(req, res) {
     });
 });
 
+// This route selects a specific id and will save or delete the article,
+// and will add a note if the user enters one
 app.post("/articles/:id", function(req, res) {
     var savedNews = req.body.savedNews;
 
     if (savedNews === "true") {
-        console.log("This section will set it to TRUE");
         Article.findOneAndUpdate({ "_id": req.params.id }, { "savedNews": true } )
             .exec(function(err, doc) {
                 if (err) {
@@ -140,7 +130,6 @@ app.post("/articles/:id", function(req, res) {
                 }
             });
     } else if (savedNews === "false") {
-        console.log("This section will set it to FALSE");
         Article.findOneAndUpdate({ "_id": req.params.id }, { "savedNews": false } )
             .exec(function(err, doc) {
                 if (err) {
@@ -170,6 +159,7 @@ app.post("/articles/:id", function(req, res) {
     }
 });
 
+// THis route will show the note on a specific article
 app.get("/articles/:id", function(req, res) {
     Article.findOne({ "_id": req.params.id })
     .populate("note")
