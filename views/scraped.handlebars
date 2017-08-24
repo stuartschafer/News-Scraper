@@ -4,11 +4,10 @@
         {{#each newsStuff}}
             <div class="col-md-8" id="rowArea">
                 <h5>{{title}}</h5>
-                <a href= {{link}}> {{link}} </a>
+                <button type="submit" id="{{_id}}" data-id="{{_id}}" class="btn btn-success save btn-sm"> Save This Article </button>
+                <a class="linktags" href= {{link}}> {{link}} </a>
                 {{!--<br>
                 {{pic}}--}}
-                
-                <button type="submit" id="{{_id}}" data-id="{{_id}}" class="btn btn-success save"> Save it! </button>
             </div>
         {{/each}}
     </div>

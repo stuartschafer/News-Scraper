@@ -57,7 +57,7 @@ app.get("/", function(req, res) {
 
 // This route will scrape the Onion's website
 app.get("/scrape", function(req, res) {
-    // Each time the user "scrapes", this will remove any article the user hasn't saved
+    // Each time the user "scrapes", this will remove any article the user hasn't previously saved
     db.collection("articles").remove({"savedNews":false});
     console.log("=-=-=-=-= This is where it should have deleted");
     request("http://www.theonion.com/", function(error, response, html) {
@@ -80,10 +80,6 @@ app.get("/scrape", function(req, res) {
 
             // For handlebars to recognize the id
             entry.newsId = entry._id;
-
-            // console.log("~~~~~~~~~~~~~");
-            // console.log(entry);
-            // console.log("~~~~~~~~~~~~~");
 
             newArray.push(entry);
 

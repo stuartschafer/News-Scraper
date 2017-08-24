@@ -4,13 +4,11 @@
             <div class="col-md-8" id="rowArea">
 
                 <h5>{{title}}</h5>
-                <a href= {{link}}> {{link}} </a>
+                <button type="submit" id="addNote" data-id="{{_id}}" title-id="{{title}}" class="btn btn-info btn-sm saveOrDelete"> Add a Note </button>
+                <button type="submit" id="deleteFromSaved" data-id="{{_id}}" title-id="{{title}}" class="btn btn-danger btn-sm saveOrDelete"> Delete from Saved </button>
+                <a class="linktags" href= {{link}}> {{link}} </a>
                 {{!--<br>
                 {{pic}}--}}
-                
-                <button type="submit" id="addNote" data-id="{{_id}}" title-id="{{title}}" class="btn btn-info saveOrDelete"> Add a Note </button>
-                <button type="submit" id="deleteFromSaved" data-id="{{_id}}" title-id="{{title}}" class="btn btn-danger saveOrDelete"> Delete from Saved </button>
-                <button type="button" class="btn btn-secondary editting" disabled>Please add/edit your note to the right</button>
             </div>
         {{/each}}
         
