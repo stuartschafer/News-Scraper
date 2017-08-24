@@ -1,14 +1,11 @@
-<div class="container">
-
-    <div class="row" id="newsStories">
-        {{#each newsStuff}}
-            <div class="col-md-8" id="rowArea">
-                <h5>{{title}}</h5>
-                <button type="submit" id="{{_id}}" data-id="{{_id}}" class="btn btn-success save btn-sm"> Save This Article </button>
-                <a class="linktags" href= {{link}}> {{link}} </a>
-                {{!--<br>
-                {{pic}}--}}
-            </div>
-        {{/each}}
-    </div>
+<div class="row" id="newsStories">
+    {{#each newsStuff}}
+        <div class="col-md-8" id="rowArea">
+            <h5>{{title}}</h5>
+            <button type="submit" id="{{_id}}" data-id="{{_id}}" class="btn btn-success save btn-sm"> Save This Article </button>
+            <a class="linktags" href= {{link}}> {{link}} </a>
+            {{!--<br>
+            {{pic}}--}}
+        </div>
+    {{/each}}
 </div>

@@ -35,3 +35,7 @@ body {
 .linktags {
 	font-family: 'Pathway Gothic One', sans-serif;
 }
+
+.container {
+	margin-top: 55px;
+}
