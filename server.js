@@ -32,8 +32,8 @@ var PORT = process.env.PORT || 8080;
 app.use(express.static("public"));
 
 // To connect with my mongoose db
-// mongoose.connect("mongodb://localhost/newsscrape");
-mongoose.connect("mongodb://heroku_5k1cfsnp:miql9ut9f31gob5986c2hvqsfg@ds141082.mlab.com:41082/heroku_5k1cfsnp");
+mongoose.connect("mongodb://localhost/newsscrape");
+// mongoose.connect("mongodb://heroku_5k1cfsnp:miql9ut9f31gob5986c2hvqsfg@ds141082.mlab.com:41082/heroku_5k1cfsnp");
 
 var db = mongoose.connection;
 
@@ -52,7 +52,6 @@ db.once("open", function() {
 });
 
 app.get("/", function(req, res) {
-    // console.log("HERE!!!!");
     res.render("index");
 });
 
@@ -79,20 +78,21 @@ app.get("/scrape", function(req, res) {
             entry.newsId = entry._id;
 
             newArray.push(entry);
+
             entry.save(function(err, doc) {
                 if (err) {
                     console.log(err);
                 }
             });
         });
-        var news = { newsStuff: newArray}
+        var news = {newsStuff: newArray}
         res.render("scraped", news);
     });
 });
 
-// This route will get all the scrapped articles from the db
+// This route will get all the saved articles from the db
 app.get("/saved", function(req, res) {
-    console.log("Saved route");
+    console.log("-------SAVED ROUTE-------");
     Article.find({"savedNews": true }, function(error, doc) {
         if (error) {
             res.send(error);
@@ -105,6 +105,7 @@ app.get("/saved", function(req, res) {
 
 // This route will get all the scrapped articles from the db
 app.get("/articles", function(req, res) {
+    console.log("-------SAVED ROUTE-------");
     Article.find({}, function(error, doc) {
         if (error) {
             res.send(error);
@@ -159,7 +160,7 @@ app.post("/articles/:id", function(req, res) {
     }
 });
 
-// THis route will show the note on a specific article
+// This route will show the note on a specific article
 app.get("/articles/:id", function(req, res) {
     Article.findOne({ "_id": req.params.id })
     .populate("note")
