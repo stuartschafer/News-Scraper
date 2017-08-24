@@ -67,7 +67,7 @@ app.get("/scrape", function(req, res) {
         // var length = $('.headline').children().length;
         $(".headline").each(function(i, element) {
             // This will only allow 10 results
-            if (i >= 3) {
+            if (i >= 10) {
                return false;
             }
             var result = {};

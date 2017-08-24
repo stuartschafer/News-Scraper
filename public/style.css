@@ -23,3 +23,8 @@ body {
 	top: 60px;
 	right: 10px;
 }
+
+#welcome_title {
+	background-color: #292b2c;
+	border: solid 3px;
+}
