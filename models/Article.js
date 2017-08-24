@@ -6,16 +6,14 @@ var Schema = mongoose.Schema;
 var ArticleSchema = new Schema({
     title: {
         type: String,
-        index: { unique: true }
-        // required: true
+        unique: true
     },
     link: {
         type: String,
-        index: { unique: true }
+        unique: true
     },
     pic: {
-        type: String,
-        index: { unique: true }
+        type: String
     },
     savedNews: {
         type: Boolean

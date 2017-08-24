@@ -22,7 +22,7 @@ $(document).on("click", ".save", function() {
         method: "POST",
         url: "/articles/" + id,
         data: {
-            savedNews: true            
+            savedNews: true
         }
     });
 });

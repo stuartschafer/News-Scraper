@@ -59,12 +59,12 @@ app.get("/", function(req, res) {
 app.get("/scrape", function(req, res) {
     // Each time the user "scrapes", this will remove any article the user hasn't previously saved
     db.collection("articles").remove({"savedNews":false});
-    console.log("=-=-=-=-= This is where it should have deleted");
+
     request("http://www.theonion.com/", function(error, response, html) {
         var newArray = [];
         var entry = {};
         var $ = cheerio.load(html);
-        // var length = $('.headline').children().length;
+
         $(".headline").each(function(i, element) {
             // This will only allow 10 results
             if (i >= 10) {
@@ -85,7 +85,10 @@ app.get("/scrape", function(req, res) {
 
             entry.save(function(err, doc) {
                 if (err) {
-                    console.log(err);
+                    // console.log(err);
+                    if (err.code === 11000) { 
+                        console.log("Article has already been saved");
+                    }
                 }
             });
         });
@@ -101,8 +104,12 @@ app.get("/saved", function(req, res) {
         if (error) {
             res.send(error);
         } else {
-            var news = { newsStuff: doc}
-            res.render("saved", news);
+            if (doc.length === 0) {
+                res.redirect("/articles");
+            } else {
+                var news = {newsStuff: doc}
+                res.render("saved", news);
+            }
         }
     })
 });
@@ -114,14 +121,15 @@ app.get("/articles", function(req, res) {
         if (error) {
             res.send(error);
         } else {
-            var news = { newsStuff: doc}
-            res.render("scraped", news);
+            if (doc.length === 0) {
+                res.redirect("/");
+            } else {
+                var news = { newsStuff: doc}
+                res.render("scraped", news);
+            }
         }
     });
 });
-
-
-
 
 // This route selects a specific id and will save or delete the article,
 // and will add a note if the user enters one
