@@ -57,21 +57,22 @@ app.get("/", function(req, res) {
 
 // This route will scrape the Onion's website
 app.get("/scrape", function(req, res) {
-    // This will drop the articles collection so that it doesn't repeat and is new each time the user scrapes
-    db.collection("articles").drop();
+    db.collection("articles").remove({"savedNews":false});
+    console.log("=-=-=-=-= This is where it should have deleted");
     request("http://www.theonion.com/", function(error, response, html) {
         var newArray = [];
         var entry = {};
         var $ = cheerio.load(html);
         // var length = $('.headline').children().length;
         $(".headline").each(function(i, element) {
-            // This will only allow 10 results to be saved
-            if (i >= 50) {
+            // This will only allow 10 results
+            if (i >= 3) {
                return false;
             }
             var result = {};
             result.title = $(this).children("a").text();
             result.link = "http://www.theonion.com" + $(this).children("a").attr("href");
+            result.savedNews = false;
             // result.pic = $(this).children(".thumb").text();
             
             entry = new Article(result);
@@ -79,9 +80,9 @@ app.get("/scrape", function(req, res) {
             // For handlebars to recognize the id
             entry.newsId = entry._id;
 
-            console.log("~~~~~~~~~~~~~");
-            console.log(entry);
-            console.log("~~~~~~~~~~~~~");
+            // console.log("~~~~~~~~~~~~~");
+            // console.log(entry);
+            // console.log("~~~~~~~~~~~~~");
 
             newArray.push(entry);
 
@@ -109,7 +110,7 @@ app.get("/saved", function(req, res) {
     })
 });
 
-// This route will get all the scrapped articles from the db
+// This route will get the last 10 scrapped articles from the db
 app.get("/articles", function(req, res) {
     console.log("-------SCRAPED ROUTE-------");
     Article.find({}, function(error, doc) {
@@ -121,6 +122,9 @@ app.get("/articles", function(req, res) {
         }
     });
 });
+
+
+
 
 // This route selects a specific id and will save or delete the article,
 // and will add a note if the user enters one
