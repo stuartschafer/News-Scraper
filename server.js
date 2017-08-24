@@ -57,6 +57,8 @@ app.get("/", function(req, res) {
 
 // This route will scrape the Onion's website
 app.get("/scrape", function(req, res) {
+    // This will drop the articles collection so that it doesn't repeat and is new each time the user scrapes
+    db.collection("articles").drop();
     request("http://www.theonion.com/", function(error, response, html) {
         var newArray = [];
         var entry = {};
@@ -64,7 +66,7 @@ app.get("/scrape", function(req, res) {
         // var length = $('.headline').children().length;
         $(".headline").each(function(i, element) {
             // This will only allow 10 results to be saved
-            if (i >= 10) {
+            if (i >= 50) {
                return false;
             }
             var result = {};
@@ -76,6 +78,10 @@ app.get("/scrape", function(req, res) {
 
             // For handlebars to recognize the id
             entry.newsId = entry._id;
+
+            console.log("~~~~~~~~~~~~~");
+            console.log(entry);
+            console.log("~~~~~~~~~~~~~");
 
             newArray.push(entry);
 
@@ -105,7 +111,7 @@ app.get("/saved", function(req, res) {
 
 // This route will get all the scrapped articles from the db
 app.get("/articles", function(req, res) {
-    console.log("-------SAVED ROUTE-------");
+    console.log("-------SCRAPED ROUTE-------");
     Article.find({}, function(error, doc) {
         if (error) {
             res.send(error);
