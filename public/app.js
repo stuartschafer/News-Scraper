@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $("#noteSection").hide();
+    $("#noteForm").hide();
     $(".savetheNote").hide();
     $(".deletetheNote").hide();
     $(".editting").hide();
@@ -43,6 +43,7 @@ $(document).on("click", "#deleteFromSaved", function() {
 
 // This will add a note to the related article
 $(document).on("click", "#addNote", function() {
+    $("#noteForm").fadeIn("slow");
     titleofNote = $(this).attr("title-id").trim();
     id = $(this).attr("data-id");
 
@@ -66,6 +67,7 @@ $(document).on("click", "#addNote", function() {
 
 // This will save the user entered note to the db
 $(document).on("click", "#saveNote", function() {
+    $("#noteForm").fadeOut("slow");
     var body = $("#noteTextArea").val().trim();
     $("#noteSection").hide();
     $("#saveNote").hide();
@@ -88,6 +90,7 @@ $(document).on("click", "#saveNote", function() {
 
 // This deletes the note from the db
 $(document).on("click", "#deleteNote", function() {
+    $("#noteForm").fadeOut("slow");
     // This empties the form
     document.getElementById("noteForm").reset();
     $("#noteSection").hide();

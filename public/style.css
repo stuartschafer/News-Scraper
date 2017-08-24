@@ -15,10 +15,12 @@ body {
 }
 
 #noteArea {
-	background-color: grey;
+	color: #949596;
 }
 
 #noteForm {
+	background-color: #292b2c;
+	padding: 15px;
 	position: fixed;
 	width: 30%;
 	top: 60px;
