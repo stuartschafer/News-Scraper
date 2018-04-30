@@ -3,9 +3,9 @@
         <div class="col-md-8" id="rowArea">
 
             <h5>{{title}}</h5>
-            <button type="submit" id="addNote" data-id="{{_id}}" title-id="{{title}}" class="btn btn-info btn-sm saveOrDelete"> Add a Note </button>
+            <button type="submit" id="addNote" data-id="{{_id}}" title-id="{{title}}" class="btn btn-info btn-sm saveOrDelete"> Add/Change Note </button>
             <button type="submit" id="deleteFromSaved" data-id="{{_id}}" title-id="{{title}}" class="btn btn-danger btn-sm saveOrDelete"> Delete from Saved </button>
-            <a class="linktags" href= {{link}}> {{link}} </a>
+            <a target="_blank" class="linktags" href= {{link}}> {{link}} </a>
             {{!--<br>
             {{pic}}--}}
         </div>
