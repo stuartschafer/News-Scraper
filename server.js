@@ -72,7 +72,7 @@ app.get("/scrape", function(req, res) {
             }
             var result = {};
             result.title = $(this).children("a").text();
-            result.link = "http://www.theonion.com" + $(this).children("a").attr("href");
+            result.link = $(this).children("a").attr("href");
             result.savedNews = false;
             // result.pic = $(this).children(".thumb").text();
             
